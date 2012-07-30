@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       
+        <record id="view_genera_effetti2" model="ir.ui.view">
+            <field name="name">genera.effetti2</field>
+            <field name="model">importa.effetti</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string='Parametri di Generazione Effetti dai Documenti' >
+                    <group col="6" colspan="6">
+                        <field name='a_data_doc'  />  
+                    </group>
+                    <group colspan="2" col="4">
+                        <button special="cancel" string="Cancel"  icon="gtk-cancel"/>
+                        <button name="importa" string="Importa Effetti " type="object" icon="terp-stock_effects-object-colorize"/>
+                    </group>
+                </form>
+                
+            </field>
+        </record>
+        
+       
+       
+               
+        <act_window name="Gerenera Effetti"
+            res_model="importa.effetti"
+            src_model="effetti"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="view_genera_effetti"/>
+        
+        
+        <record id="action_gen_effetti_form" model="ir.actions.act_window">
+            <field name="name">Generazione Effetti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">importa.effetti</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem name="Generazione Effetti" 
+            icon="STOCK_JUSTIFY_FILL" 
+            id="menu_gen_effetti" 
+            parent="menu_effetti" 
+            action="action_gen_effetti_form"
+            sequence="1"
+        />   
+        
+        
+    </data>
+</openerp>
+

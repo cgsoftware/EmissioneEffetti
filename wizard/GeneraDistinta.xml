@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        
+        <record id="genera_dist_effetti" model="ir.ui.view">
+            <field name="name">gendist.effetti</field>
+            <field name="model">gendist.effetti</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string='Parametri di Generazione Distinte di Presentazione Effetti' >
+                    <group col="6" colspan="6">
+                        <field name='da_data_scadenza'  />  
+                        <field name='a_data_scadenza'  />  
+                        <field name='totale_importo'  />  
+                        <separator string="Dati Distinta" colspan="4"/>
+                        <field name='banca_pres'  /> 
+                        <field name='data_distinta' /> 
+                        <field name='data_presentazione'  /> 
+                        <field name= 'st_anag_compl' /> 
+                    </group>                    
+                    <group colspan="2" col="4">
+                        <button special="cancel" string="Cancel"  icon="gtk-cancel"/>
+                        <button name="generadist" string="Genera Distinta " type="object" icon="terp-stock_effects-object-colorize"/>
+                    </group>
+                </form>              
+            </field>
+        </record>
+              
+        <act_window name="Gerenera Distinta"
+            res_model="gendist.effetti"
+            src_model="distinte.effetti"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="view_genera_distinte_effetti"/>
+        
+        <record id="action_gen_dist_effetti_form" model="ir.actions.act_window">
+            <field name="name">Generazione Distinta Effetti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gendist.effetti</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem
+                    name="Generazione Distinta Effetti" 
+                    icon="STOCK_JUSTIFY_FILL" 
+                    id="menu_gen_dist_effetti" 
+                    parent="menu_effetti" 
+                    action="action_gen_dist_effetti_form" 
+                    sequence="3"
+                    />
+                
+        
+    </data>
+</openerp>

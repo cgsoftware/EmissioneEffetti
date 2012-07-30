@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--  tree ricerca Effetti -->
+        
+        <record id="effetti_view_tree" model="ir.ui.view">
+            <field name="name">effetti.tree</field>
+            <field name="model">effetti</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Gestione Effetti" colors="red:distinta != False">
+                    <field name="name" select="1"/>
+                    <field name="data_scadenza" select="1"/>
+                    <field name="importo_effetto" />                    
+                    <field name="cliente_id" on_change="onchange_partner_id(cliente_id)" select="1"/>
+                    <field name="banca_patner" select="1"/>
+                    <field name="contabilizzato" select="1"/>
+                    <field name="distinta" select="1"/>
+                    
+                </tree>
+            </field>
+        </record>
+        
+        <!--  form Effetti -->
+        <record id="effetti_form" model="ir.ui.view">
+            <field name="name">effetti.form</field>
+            <field name="model">effetti</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Gestione Effetti">
+                    <group col="6" colspan="4">
+                        <field name="name" select="1"/>
+                        <field name="data_scadenza" select="1"/>
+                        <newline/>                                       
+                        <field name="cliente_id" select="1"/>
+                        <field name="banca_patner" select="1"/>                      
+                        <field name="importo_effetto" />   
+                        <newline/>
+                        <field name="note" select="1"/>
+                        <newline/>
+                        <field name="contabilizzato" select="1"/>
+                        <field name="distinta" select="1"/>
+                        <field name="bolli"/>
+                    </group>     
+                    <newline/>
+                    <separator string="Elenco Scadenze Associate" colspan="4"/>
+                    <field name="righe_scadenze" nolabel="1" mode="tree,form" string="Scadenze dell Effetto">
+                        <tree editable="top"  string="Scadenza Effetto">
+                            <field name="scadenza_id" size='30' />
+                            <field name="numero_doc" size='30' />
+                            <field name="data_documento" size='30' />
+                            <field name="importo_scadenza" size='30' />
+                            <field name="totale_documento" size='30' />
+                            <field name="pagamento" size='30' />
+                        </tree>
+                        <form>
+                                <field name="scadenza_id" size='30' />
+                                <field name="numero_doc" size='30' />
+                                <field name="data_documento" size='30' />
+                                <field name="importo_scadenza" size='30' />
+                                <field name="totale_documento" size='30' />
+                                <field name="pagamento" size='30' />
+                        </form>
+                    </field>                    
+                </form>
+            </field>
+        </record>
+        
+        <!--  Action Effetti -->
+        
+        <record id="action_effetti_form" model="ir.actions.act_window">
+            <field name="name">Gestione Effetti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">effetti</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!--  Menù Effetti -->
+        
+        <menuitem name="Gestione/Emissione Effetti" id="menu_effetti" parent="account.menu_finance" />
+        <menuitem name="Manutenzione Effetti" icon="STOCK_JUSTIFY_FILL" id="menu_gestione_effetti" parent="menu_effetti" action="action_effetti_form" sequence="2" />
+        
+        <!--  tree ricerca Distinte -->  
+        
+        <record id="distinte_efffetti_view_tree" model="ir.ui.view">
+            <field name="name">distinte.effetti.tree</field>
+            <field name="model">distinte.effetti</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Gestione Distinte Effetti">
+                    <field name="name" select="1"/>
+                    <field name="data_distinta" select="1"/>
+                    <field name="totale_distinta" />                    
+                    <field name="banca_pres" select="1"/>
+                    <field name="data_presentazione" select="1"/>
+                    <field name="st_anag_compl" select="1"/>
+                    
+                </tree>
+            </field>
+        </record>
+        
+        <!--  form distinte Effetti -->
+        <record id="distinte_effetti_form" model="ir.ui.view">
+            <field name="name">distinte.effetti.form</field>
+            <field name="model">distinte.effetti</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Gestione Distinte Effetti">
+                    <group col="6" colspan="4">
+                        <field name="name" select="1"/>
+                        <field name="data_distinta" select="1"/>
+                        <newline/>  
+                        <field name='company_partner_id' invisible="True"  />
+                        <field name='banca_pres'  domain="[('partner_id', '=', company_partner_id)]"  />  
+                        <field name="data_presentazione" select="1"/>                      
+                        <field name="st_anag_compl" />   
+                        <newline/>
+                        <field name="note" select="1"/>
+                        <newline/>
+                        <field name="totale_distinta" select="1"/>
+                    </group>     
+                    <newline/>
+                    <separator string="Elenco Effetti Associati" colspan="4"/>
+                    <field name="righe_effetti" nolabel="1" mode="tree,form" string="Effetti della Distinta">
+                        <tree editable="top"  string="Dettaglio Distinta">
+                            <field name="effetto_id" size='30' />
+                            <field name="cliente" size='30' />
+                            <field name="banca_patner" size='30' />
+                            <field name="scadenza_effetto" size='30' />
+                            <field name="importo_effetto" size='30' />
+                        </tree>
+                        <form>
+                            <field name="effetto_id" size='30' />
+                            <field name="cliente" size='30' />
+                            <field name="banca_patner" size='30' />                            
+                            <field name="scadenza_effetto" size='30' />
+                            <field name="importo_effetto" size='30' />
+                        </form>
+                    </field>                    
+                </form>
+            </field>
+        </record>
+        
+        <!--  Action distinte Effetti -->
+        
+        <record id="action_distinte_effetti_form" model="ir.actions.act_window">
+            <field name="name">Gestione Distinte Effetti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">distinte.effetti</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--  Menù distinte Effetti -->
+        
+        <menuitem name="Manutenzione Distinte Effetti" icon="STOCK_JUSTIFY_FILL" id="menu_distinte_effetti" parent="menu_effetti" action="action_distinte_effetti_form" sequence="4" />
+        
+        
+        <!-- Gestione Codice Sia sulle Banche dall'Azienda -->
+        
+        <record model="ir.ui.view" id="view_partner_bank_formsia">
+            <field name="name">res.partner.bank.formsia</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="acc_number" position="after">
+                    <newline/>                  
+                    <field name="codice_sia" />	
+                </field>     
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_partner_bank_treesia">
+            <field name="name">res.partner.bank.treesia</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page/field[@name='bank_ids']/tree/field[@name='acc_number']" position="after">                 
+                    <field name="codice_sia" />	
+                </xpath>     
+            </field>
+        </record>     
+        
+        
+        <record model="ir.ui.view" id="view_partner_form_ragef">
+            <field name="name">res.partner.form.ragef</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="property_payment_term" position="after">           
+                    <field name="raggruppa_riba" />	
+                </field>     
+            </field>
+        </record>
+        
+        
+        <record model="ir.ui.view" id="view_fiscaldoc_form_effettico">
+            <field name="name">view.fiscaldoc.form.effettico</field>
+            <field name="model">fiscaldoc.header</field>
+            <field name="inherit_id" ref="ItalianFiscalDocument.view_fiscaldoc_form"/>
+            <field name="arch" type="xml">
+               <field name="importo_scadenza" position="after">
+                <field name="generato_effetto" />
+              </field>
+            </field>
+        </record>   
+        
+                
+        
+        
+    </data>
+    
+    
+</openerp>

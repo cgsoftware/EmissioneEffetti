@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_EffettiHeader","effetti","model_effetti",,1,1,1,1
+"access_EffettiScadenze","effetti.scadenze","model_effetti_scadenze",,1,1,1,1
+"access_DistinteEffettiHeader","distinte.effetti","model_distinte_effetti",,1,1,1,1
+"access_DistinteEffettiRighe","distinte.effetti.righe","model_distinte_effetti_righe",,1,1,1,1
